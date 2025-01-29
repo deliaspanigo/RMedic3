@@ -84,7 +84,7 @@ source("lib.R")
 source("functionsHo.R")
 
 source("fn_00_general/fn_00_general.R")
-
+source("fn_shiny/fn_shiny.R")
 ########################################
 # Obtener la lista de archivos .R en la carpeta especificada
 vector_files_modules_RM3 <- list.files("modules_RM3", pattern = "\\.R$", full.names = TRUE)

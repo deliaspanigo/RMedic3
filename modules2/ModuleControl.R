@@ -28,7 +28,7 @@ ModuleControlSERVER <-  function(input, output, session, base,
                                 zocalo_CIE = zocalo_CIE,
                                 verbatim = FALSE)
     
-    observe({print(UserSelection)})
+    # observe({print(UserSelection)})
     
     MiniBase <- callModule(module = MiniBaseSERVER, id =  "control02",
                            base = base,
@@ -75,7 +75,8 @@ ModuleControlSERVER <-  function(input, output, session, base,
         fluidRow(
           column(1),
           column(10,
-                 h3(HTML("<u><b>Menú para Control</b></u>")),
+                 #h3(HTML("<u><b>Menú para Control</b></u>")),
+                 h3_mod("Menú para Control"),
                  BatallaNavalUI(ns("control01")),
                  MiniBaseUI(ns("control02")),
                  Control1Q_UI(ns("control03")),
