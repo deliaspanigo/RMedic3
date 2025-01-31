@@ -120,7 +120,7 @@ module_pack002_import_s00_general_p03_ui <- function(id){
       br(),
       
       h2(tags$u(tags$b(textOutput(ns("title01"))))),
-      DTOutput(ns("df_database")))
+      withSpinner(DTOutput(ns("df_database"))))
   
   # 
   # div(htmlOutput(ns("TextBase_InfoDataSet_01"),

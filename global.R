@@ -6,6 +6,7 @@ options(encoding = "UTF-8")
 options(shiny.maxRequestSize = 500*1024^2)
 
 library("colourpicker")
+library("shinycssloaders")
 library(shiny)
 library(shinyjs)
 library(shinyBS)
@@ -225,6 +226,7 @@ source("modules/Control1Q.R")
 source("modules/Control1C.R")
 source("modules/Control2Q.R")
 source("modules/Control2C.R")
+source("modules/ControlQC.R")
 
 ###########################################
 source("modules/Z_Distribuciones.R")

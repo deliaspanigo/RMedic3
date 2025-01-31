@@ -97,25 +97,27 @@ Control2C_SERVER <- function(input, output, session,
     
     # Si es el caso 4, seguimos!
     div(
-      h2("RMedic - Control para 2 Variable Numéricas"),
-      "El control sobre dos variables numéricas se lleva a cabo solo sobre las filas que 
-      poseen simultáneamente datos de ambas variables.",
+      h2_mod("RMedic - Control para 2 Variable Numéricas"),
+      h4("- El control sobre dos variables numéricas se lleva a cabo solo sobre las filas que 
+      poseen simultáneamente datos de ambas variables."),
+      h4("- Los valores mínimo y máximo de cada variable deben tener sentido en el marco de la experiencia."), 
+      h4("- Corroborar la presencia de celdas vacías."),
       br(),
       br(),
-      h3(paste0("Parte 1 de 3 - Mínimo y Máximo - Variable 1: ", batalla_naval()[[1]][1])),
-      htmlOutput(ns("Texto_Control01")),
+      h3_mod(paste0("Parte 1 de 3 - Mínimo y Máximo - Variable 1: ", batalla_naval()[[1]][1])),
+      h4(htmlOutput(ns("Texto_Control01"))),
       br(),
       tableOutput(ns("Tabla_Control01")),
       br(),
       br(),
-      h3(paste0("Parte 2 de 3 - Mínimo y Máximo - Variable 2: ", batalla_naval()[[1]][2])),
-      htmlOutput(ns("Texto_Control02")),
+      h3_mod(paste0("Parte 2 de 3 - Mínimo y Máximo - Variable 2: ", batalla_naval()[[1]][2])),
+      h4(htmlOutput(ns("Texto_Control02"))),
       br(),
       tableOutput(ns("Tabla_Control02")),
       br(),
       br(),
-      h3("Parte 3 de 3 - Celdas vacías"),
-      htmlOutput(ns("Texto_Control03")),
+      h3_mod("Parte 3 de 3 - Celdas vacías"),
+      h4(htmlOutput(ns("Texto_Control03"))),
       br(),
       tableOutput(ns("Tabla_Control03"))
       

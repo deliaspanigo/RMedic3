@@ -88,17 +88,20 @@ Control2Q_SERVER <- function(input, output, session,
     
     # Si es el caso 1, seguimos!
     div(
-      h2("RMedic - Control para 2 Variables Categóricas"),
+      h2_mod("RMedic - Control para 2 Variables Categóricas"),
+      h4("- El control sobre dos variables categóricas se lleva a cabo solo sobre las filas que 
+      poseen simultáneamente datos de ambas variables."),
+      h4("- Corroborar que en ambas variables sus categorías y la cantidad de categorías debe tener sentido en el marco de la experiencia."), 
+      h4("- Corroborar la presencia de celdas vacías."),
       br(),
-      br(),
-      h3("Parte 1 de 2 - Combinación de Categorías"),
-      htmlOutput(ns("Texto_Control01")),
+      h3_mod("Parte 1 de 2 - Combinación de Categorías"),
+      h4(htmlOutput(ns("Texto_Control01"))),
       br(),
       tableOutput(ns("Tabla_Control01")),
       br(),
       br(),
-      h3("Parte 2 de 2 - Celdas vacías"),
-      htmlOutput(ns("Texto_Control02")),
+      h3_mod("Parte 2 de 2 - Celdas vacías"),
+      h4(htmlOutput(ns("Texto_Control02"))),
       br(),
       tableOutput(ns("Tabla_Control02"))
       

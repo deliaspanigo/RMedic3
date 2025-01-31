@@ -2,20 +2,20 @@
 # # #
 # # #
 
-# Carga general|
+# # # Loading...
 source("global.R")
 
 
 
-# Definir la interfaz de usuario
+# # # User interface - UI
 ui <- shiny::navbarPage(theme = "styles.css",inverse=TRUE,
       useShinyjs(),
       tags$head(tags$style(HTML("
-.selectize-input, .selectize-dropdown, .select-input, .select-dropdown,
-[type = 'number'], .radio, label, .nav-tabs, table, data.table{
-font-size: 120%;
-}
-"))),   
+            .selectize-input, .selectize-dropdown, .select-input, .select-dropdown,
+            [type = 'number'], .radio, label, .nav-tabs, table, data.table{
+            font-size: 120%;
+            }
+      "))),   
       title = strong("I need RMEDIC here!"),
       windowTitle = "RMedic - Medicina y R", 
       fluid = TRUE, 
@@ -40,15 +40,16 @@ font-size: 120%;
 
 
 
-# Definir la lógica del servidor
+# # # Server - SERVER
 server <- function(input, output, session) {
   
-  # Obtener la ubicación del usuario al conectarse
+  # # # Section 01 - User Location  # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+  
+  
+  # User location
   user_location <- get_user_location()
   
-  # Obtener la ubicación del usuario al conectarse
-  user_location <- get_user_location()
-  
+
   if (!is.null(user_location)) {
     # Definir el archivo de registro
     log_file <- "user_locations.log"
@@ -58,11 +59,15 @@ server <- function(input, output, session) {
       file.create(log_file)
     }
     
-    # Guardar la información de la ubicación en el archivo de registro
+    # Save info from user on file
     log_entry <- paste(Sys.time(), user_location$ip, user_location$city, user_location$region, user_location$country, sep = ", ")
     write(log_entry, file = log_file, append = TRUE)
     
   }
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+  
+  
+  
   
   # # # Server Modules 01 - Folder: modules_01_tabs
   
@@ -72,199 +77,11 @@ server <- function(input, output, session) {
   # 02 - RMedic Software
   RMedicTabServer("RMedicTab")
   
-  # 
-  # 
-  # observeEvent(input$showpanel, {
-  # 
-  #   if(input$showpanel == TRUE) {
-  #     removeCssClass("Main", "col-sm-12")
-  #     addCssClass("Main", "col-sm-8")
-  #     shinyjs::show(id = "Sidebar")
-  #     shinyjs::enable(id = "Sidebar")
-  #   }
-  #   else {
-  #     removeCssClass("Main", "col-sm-8")
-  #     addCssClass("Main", "col-sm-12")
-  #     shinyjs::hide(id = "Sidebar")
-  #   }
-  # })
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # ##############################################
-  # 
-  # 
-  # 
-  # 
-  # ########################################################
-  # 
-  # 
-  # 
-  # # 1 - Base ------------------------------------------------
-  # {
-  #   ###
-  # 
-  #   # Modulo01... Nos otorga
-  #   # 1) BaseSalida
-  #   # 2) zocalo_CIE
-  #   # 3) RMedic_general
-  #   # 4) status_BaseSalida
-  #   Modulo01 <- callModule(module = SideBarBaseSERVER, id =  "base01")
-  #   zocalo_CIE <- Modulo01$zocalo_CIE
-  #   RMedic_general <- Modulo01$RMedic_general
-  #   status_BaseSalida <- Modulo01$status_BaseSalida
-  # 
-  # 
-  # 
-  #   # observe(cat(zocalo_CIE()))
-  # 
-  #   menuBASE <- reactive({
-  # 
-  # 
-  #     tabs <- list()
-  # 
-  #     tabs[[1]] <-    tabPanel(title = "Base de Datos",
-  #                              # icon = icon("user-md"),
-  #                              value = 1,
-  #                              br(),
-  #                              fluidRow(
-  # 
-  #                                MiBase01_UI("base01")#,
-  # 
-  #                              ),
-  #                              br(), br()
-  #     )
-  # 
-  #     tabs
-  # 
-  #   })
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # # 2 - Control ----------------------------------------------
-  # {
-  #   ###
-  # 
-  #   menuCONTROL <- callModule(module = ModuleControlSERVER,
-  #                             id =  "menuCONTROL",
-  #                             base = Modulo01$BaseSalida,
-  #                             RMedic_general = RMedic_general,
-  #                             status_BaseSalida = status_BaseSalida,
-  #                             zocalo_CIE = zocalo_CIE)
-  # 
-  # 
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # 
-  # 
-  # 
-  # # 3 - Tablas ----------------------------------------------
-  # {
-  #   ###
-  # 
-  #   menuTABLAS <- callModule(module = ModuleTablasSERVER,
-  #                            id =  "menuTABLAS",
-  #                            base = Modulo01$BaseSalida,
-  #                            RMedic_general = RMedic_general,
-  #                            status_BaseSalida = status_BaseSalida,
-  #                            zocalo_CIE = zocalo_CIE)
-  # 
-  # 
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # 
-  # # 4 - Graficos ----------------------------------------------
-  # {
-  #   ###
-  # 
-  #   menuGRAFICOS <- callModule(module = ModuleGraficosSERVER,
-  #                              id =  "menuGRAFICOS",
-  #                              base = Modulo01$BaseSalida,
-  #                              RMedic_general = RMedic_general,
-  #                              status_BaseSalida = status_BaseSalida,
-  #                              zocalo_CIE = zocalo_CIE)
-  # 
-  # 
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # 
-  # # 5 - Ho ----------------------------------------------
-  # {
-  #   ###
-  # 
-  #   menuHO <- callModule(module = ModuleHoSERVER,
-  #                        id =  "menuHO",
-  #                        base = Modulo01$BaseSalida,
-  #                        RMedic_general = RMedic_general,
-  #                        status_BaseSalida = status_BaseSalida,
-  #                        zocalo_CIE = zocalo_CIE)
-  # 
-  # 
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # 
-  # 
-  # # 6 - Sobrevida ----------------------------------------------
-  # {
-  #   ###
-  # 
-  #   menuSOBREVIDA <- callModule(module = ModuleSobrevidaSERVER,
-  #                               id =  "menuSOBREVIDA",
-  #                               base = Modulo01$BaseSalida,
-  #                               RMedic_general = RMedic_general,
-  #                               status_BaseSalida = status_BaseSalida,
-  #                               zocalo_CIE = zocalo_CIE)
-  # 
-  # 
-  # 
-  #   ###
-  # }
-  # ###########################################################
-  # 
-  # 
-  # 
-  # observe(output[["RMedicSoft"]] <- renderUI({
-  # 
-  # 
-  #   # do.call(tabsetPanel,  c(id="goku", tabs1,tabs2, tabs3, tabs4, tabs5, tabs6))
-  #   do.call(tabsetPanel,  c(id = "PanelRMedic",
-  #                           menuBASE(),
-  #                           menuCONTROL() ,
-  #                           menuTABLAS() ,
-  #                           menuGRAFICOS() ,
-  #                           menuHO(),
-  #                           menuSOBREVIDA()
-  #   )
-  #   )
-  # 
-  # }))
-  # 
-  # ####################################################################################
+  # 03 - Tools
+  
+  
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+  
   # 
   # 
   # 

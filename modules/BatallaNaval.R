@@ -562,11 +562,18 @@ BatallaNavalSERVER <- function(input, output, session,
     
     # Usamos solo la salida HTML
     paste0(
-    div(
-      h3(names(zocalo())[1]),
-      zocalo()[[1]]
+      div(
+        h3_mod(names(zocalo())[1]), 
+        h4(zocalo()[[1]])
+      )
     )
-    )
+    
+    # paste0(
+    # div(
+    #   h3(names(zocalo())[1]),
+    #   zocalo()[[1]]
+    # )
+    # )
 
   }) 
   

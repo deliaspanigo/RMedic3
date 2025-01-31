@@ -89,17 +89,19 @@ Control1C_SERVER <- function(input, output, session,
     
     # Si es el caso 2, seguimos!
     div(
-      h2("RMedic - Control para 1 Variable Numérica"),
+      h2_mod("RMedic - Control para 1 Variable Numérica"),
+      h4("- Los valores mínimo y máximo de la variable numérica deben tener sentido en el marco de la experiencia."), 
+      h4("- Corroborar la presencia de celdas vacías."),
       br(),
       br(),
-      h3("Parte 1 de 2 - Mínimo y Máximo dentro de lo esperado"),
-      htmlOutput(ns("Texto_Control01")),
+      h3_mod("Parte 1 de 2 - Mínimo y Máximo dentro de lo esperado"),
+      h4(htmlOutput(ns("Texto_Control01"))),
       br(),
       tableOutput(ns("Tabla_Control01")),
       br(),
       br(),
-      h3("Parte 2 de 2 - Celdas vacías"),
-      htmlOutput(ns("Texto_Control02")),
+      h3_mod("Parte 2 de 2 - Celdas vacías"),
+      h4(htmlOutput(ns("Texto_Control02"))),
       br(),
       tableOutput(ns("Tabla_Control02"))
       
