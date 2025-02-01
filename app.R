@@ -32,9 +32,9 @@ ui <- shiny::navbarPage(theme = "styles.css",inverse=TRUE,
       
       
 
-      shiny::tabPanel(title = "Inicio3", icon = icon("house"), homeTabUI("homeTab")),
-      shiny::tabPanel(title = "RMedic3", icon = icon("house"), RMedicTabUI("RMedicTab")),
-      shiny::tabPanel(title = "Herramientas3", source("tabs/HerramientasTab.R", encoding = "UTF-8")$value)
+      shiny::tabPanel(title = "Inicio33", icon = icon("house"), homeTabUI("homeTab")),
+      shiny::tabPanel(title = "RMedic33", icon = icon("house"), RMedicTabUI("RMedicTab")),
+      shiny::tabPanel(title = "Herramientas33", source("tabs/HerramientasTab.R", encoding = "UTF-8")$value)
 )
 
 
