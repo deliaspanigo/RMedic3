@@ -32,8 +32,8 @@ ui <- shiny::navbarPage(theme = "styles.css",inverse=TRUE,
       
       
 
-      shiny::tabPanel(title = "Inicio33", icon = icon("house"), homeTabUI("homeTab")),
-      shiny::tabPanel(title = "RMedic33", icon = icon("house"), RMedicTabUI("RMedicTab")),
+      shiny::tabPanel(title = "Inicio33", icon = icon("house"), tab01_home_UI("homeTab")),
+      shiny::tabPanel(title = "RMedic33", icon = icon("house"), tab02_soft_UI("RMedicTab")),
       shiny::tabPanel(title = "Herramientas33", source("tabs/HerramientasTab.R", encoding = "UTF-8")$value)
 )
 
@@ -69,13 +69,13 @@ server <- function(input, output, session) {
   
   
   
-  # # # Server Modules 01 - Folder: modules_01_tabs
+  # # # Server Modules 01
   
   # 01 - Homepage
-  homeTabServer("homeTab")
+  tab01_home_SERVER("homeTab")
   
   # 02 - RMedic Software
-  RMedicTabServer("RMedicTab")
+  tab02_soft_SERVER("RMedicTab")
   
   # 03 - Tools
   

@@ -88,14 +88,16 @@ source("fn_00_general/fn_00_general.R")
 source("fn_shiny/fn_shiny.R")
 ########################################
 # Obtener la lista de archivos .R en la carpeta especificada
-vector_files_modules_RM3 <- list.files("modules_RM3", pattern = "\\.R$", full.names = TRUE)
+vector_files_modules_RM3 <- list.files(path = "modules_RM3", full.names = T, recursive = T, pattern = "\\.R$")
+
+
 
 # Cargar cada archivo .R
 lapply(vector_files_modules_RM3, source)
 ########################################
 # Tabs for all
-source("modules_01_tabs/homeTab.R")
-source("modules_01_tabs/RMedicTab.R")
+#source("modules_01_tabs/homeTab.R")
+#source("modules_01_tabs/RMedicTab.R")
 
 # RMedic modules
 source("modules_01_03_RM_01_side/SideBarBase.R")
@@ -215,18 +217,18 @@ source("modules/KM_SobrevidaGeneral.R")
 source("modules/KM_SobrevidaGrupos.R")
 
 source("modules2/ModuleBase.R")
-source("modules2/ModuleControl.R")
+#source("modules2/ModuleControl.R")
 source("modules2/ModuleTablas.R")
 source("modules2/ModuleGraficos.R")
 source("modules2/ModuleHo.R")
 source("modules2/ModuleSobrevida.R")
 
 # Control
-source("modules/Control1Q.R")
-source("modules/Control1C.R")
-source("modules/Control2Q.R")
-source("modules/Control2C.R")
-source("modules/ControlQC.R")
+#source("modules/Control1Q.R")
+#source("modules/Control1C.R")
+#source("modules/Control2Q.R")
+#source("modules/Control2C.R")
+#source("modules/ControlQC.R")
 
 ###########################################
 source("modules/Z_Distribuciones.R")

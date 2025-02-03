@@ -1,4 +1,4 @@
-homeTabUI <- function(id) {
+tab01_home_UI <- function(id) {
   ns <- NS(id)
   tabPanel(
     title = "Inicio", icon = icon("home"),
@@ -59,7 +59,7 @@ homeTabUI <- function(id) {
 
 
 
-homeTabServer <- function(id) {
+tab01_home_SERVER <- function(id) {
   moduleServer(id, function(input, output, session) {
     # Lógica del servidor para la pestaña "Inicio"
   })

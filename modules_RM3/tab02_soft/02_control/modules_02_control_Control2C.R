@@ -1,5 +1,5 @@
 ## Segmento del UI
-Control2C_UI <- function(id) {
+modules_02_control_Control2C_UI <- function(id) {
   ns <- NS(id)
   
   uiOutput(ns("SeccionControl2C"))
@@ -11,7 +11,7 @@ Control2C_UI <- function(id) {
 
 
 ## Segmento del server
-Control2C_SERVER <- function(input, output, session, 
+modules_02_control_Control2C_SERVER <- function(input, output, session, 
                              base, 
                              batalla_naval,
                              decimales) {

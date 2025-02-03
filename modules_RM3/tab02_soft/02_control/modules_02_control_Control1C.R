@@ -1,8 +1,8 @@
 ## Segmento del UI
-Control1Q_UI <- function(id) {
+modules_02_control_Control1C_UI <- function(id) {
   ns <- NS(id)
   
-  uiOutput(ns("SeccionControl1Q"))
+  uiOutput(ns("SeccionControl1C"))
   
   
 }
@@ -11,10 +11,10 @@ Control1Q_UI <- function(id) {
 
 
 ## Segmento del server
-Control1Q_SERVER <- function(input, output, session, 
-                            base, 
-                            batalla_naval,
-                            decimales) {
+modules_02_control_Control1C_SERVER <- function(input, output, session, 
+                             base, 
+                             batalla_naval,
+                             decimales) {
   
   
   
@@ -36,13 +36,13 @@ Control1Q_SERVER <- function(input, output, session,
   })
   
   # Todas las tablas 1Q
-  Reactive_control_1q_RMedic <- reactive({
+  Reactive_control_1c_RMedic <- reactive({
     
     if(is.null(casoRMedic())) return(NULL)
-    if(casoRMedic() != 1) return(NULL)
+    if(casoRMedic() != 2) return(NULL)
     
     
-    salida <-  control_1q_RMedic(base = base(), columna = batalla_naval()[[1]])
+    salida <-  control_1c_RMedic(base = base(), columna = batalla_naval()[[1]])
     
     
     
@@ -57,43 +57,44 @@ Control1Q_SERVER <- function(input, output, session,
   
   # Control 1Q - Tabla 01      
   output$Tabla_Control01 <- renderTable(rownames = FALSE, align= "c",{
-    Reactive_control_1q_RMedic()[[1]]
+    Reactive_control_1c_RMedic()[[1]]
   })
   
   # Control 1Q - Texto 01 
   output$Texto_Control01 <- renderText({
-    Reactive_control_1q_RMedic()[[2]]
+    Reactive_control_1c_RMedic()[[2]]
   })
   
   # Control 1Q - Tabla 02      
   output$Tabla_Control02 <- renderTable(align= "c",{
-    Reactive_control_1q_RMedic()[[3]]
+    Reactive_control_1c_RMedic()[[3]]
   })
   
   # Control 1Q - Texto 02 
   output$Texto_Control02 <- renderText({
-    Reactive_control_1q_RMedic()[[4]]
+    Reactive_control_1c_RMedic()[[4]]
   })
   
   
- 
   
   
-  output$SeccionControl1Q <- renderUI({
+  
+  output$SeccionControl1C <- renderUI({
     
     # Especificaciones de cumplimiento
     if(is.null(casoRMedic())) return(NULL)
-    if(casoRMedic() != 1) return(NULL)
+    if(casoRMedic() != 2) return(NULL)
     
-
-    # Si es el caso 1, seguimos!
+    
+    
+    # Si es el caso 2, seguimos!
     div(
-      h2_mod("RMedic - Control para 1 Variable Categórica"),
-      h4("- Corroborar las categorías y la cantidad de categorías debe tener sentido en el marco de la experiencia."),
-      h4("- Corroborar la presencia de celdas vacías."),
+      h2_mod("RMedic - Control para 1 Variable Numérica"),
+      h4("- Los valores mínimo y máximo deben tener sentido en el marco de la experiencia."), 
+      h4("- Corroborar la presencia o no de celdas vacías."),
       br(),
       br(),
-      h3_mod("Parte 1 de 2 - Categorías"),
+      h3_mod("Parte 1 de 2 - Mínimo y Máximo dentro de lo esperado"),
       h4(htmlOutput(ns("Texto_Control01"))),
       br(),
       tableOutput(ns("Tabla_Control01")),

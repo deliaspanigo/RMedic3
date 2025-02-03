@@ -4326,9 +4326,23 @@ control_qc_RMedic <- function(base = NULL, columna = NULL, decimales = 2){
   ##############################################################################
   # Return exitoso
   #  salida <- list(tabla01, frase01, tabla02, frase02)
+  # # # #NUEVO
   
+#  minibase <- database[selected_cols]
+#  minibase <- na.omit(minibase)
+  
+  
+  tabla02 <- cbind.data.frame("Cantidad de datos" = tapply(minibase[,2], minibase[,1], length),
+                              "Mínimo" = tapply(minibase[,2], minibase[,1], min),
+                              "Máximo" = tapply(minibase[,2], minibase[,1], max))
+  
+  
+  tabla02 <- cbind.data.frame(rownames(tabla02), tabla02)
+  colnames(tabla02)[1] <- "Categorías"
+  
+  # # # # # 
   # Cambiamos el orden de la salida
-  salida <- list(tabla02, frase02, tabla03, frase03, tabla01, frase01)
+  salida <- list(tabla02, frase02, tabla01, frase03, tabla03, frase01)
   return(salida)
   
   

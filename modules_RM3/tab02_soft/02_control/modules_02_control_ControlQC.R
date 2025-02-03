@@ -1,8 +1,8 @@
 ## Segmento del UI
-Control2Q_UI <- function(id) {
+modules_02_control_ControlQC_UI <- function(id) {
   ns <- NS(id)
   
-  uiOutput(ns("SeccionControl2Q"))
+  uiOutput(ns("SeccionControlQC"))
   
   
 }
@@ -11,7 +11,7 @@ Control2Q_UI <- function(id) {
 
 
 ## Segmento del server
-Control2Q_SERVER <- function(input, output, session, 
+modules_02_control_ControlQC_SERVER <- function(input, output, session, 
                              base, 
                              batalla_naval,
                              decimales) {
@@ -22,7 +22,7 @@ Control2Q_SERVER <- function(input, output, session,
   # NameSpaceasing for the session
   ns <- session$ns
   
-  # Caso 3: 2Q
+  # Caso 3: QC
   casoRMedic <- reactive({
     
     if(is.null(batalla_naval())) return(NULL)
@@ -36,13 +36,18 @@ Control2Q_SERVER <- function(input, output, session,
   })
   
   # Todas las tablas 1Q
-  Reactive_control_2q_RMedic <- reactive({
+  Reactive_control_qc_RMedic <- reactive({
     
     if(is.null(casoRMedic())) return(NULL)
-    if(casoRMedic() != 3) return(NULL)
+    if(casoRMedic() != 5) return(NULL)
     
+    #print(batalla_naval()[[1]])
+    #print(batalla_naval())
     
-    salida <-  control_2q_RMedic(base = base(), columna = batalla_naval()[[1]])
+    vector_selected_vars <- batalla_naval()[[1]]
+    if(identical(batalla_naval()[[1]], c(1, 10))) vector_selected_vars <- vector_selected_vars[c(2,1)]
+    
+    salida <-  control_qc_RMedic(base = base(), columna = vector_selected_vars)
     
     
     
@@ -57,42 +62,42 @@ Control2Q_SERVER <- function(input, output, session,
   
   # Control 1Q - Tabla 01      
   output$Tabla_Control01 <- renderTable(rownames = FALSE, align= "c",{
-    Reactive_control_2q_RMedic()[[1]]
+    Reactive_control_qc_RMedic()[[1]]
   })
   
   # Control 1Q - Texto 01 
   output$Texto_Control01 <- renderText({
-    Reactive_control_2q_RMedic()[[2]]
+    Reactive_control_qc_RMedic()[[2]]
   })
   
   # Control 1Q - Tabla 02      
   output$Tabla_Control02 <- renderTable(align= "c",{
-    Reactive_control_2q_RMedic()[[3]]
+    Reactive_control_qc_RMedic()[[3]]
   })
   
   # Control 1Q - Texto 02 
   output$Texto_Control02 <- renderText({
-    Reactive_control_2q_RMedic()[[4]]
+    Reactive_control_qc_RMedic()[[4]]
   })
   
   
   
   
   
-  output$SeccionControl2Q <- renderUI({
+  output$SeccionControlQC <- renderUI({
     
     # Especificaciones de cumplimiento
     if(is.null(casoRMedic())) return(NULL)
-    if(casoRMedic() != 3) return(NULL)
+    if(casoRMedic() != 5) return(NULL)
     
     
     # Si es el caso 1, seguimos!
     div(
-      h2_mod("RMedic - Control para 2 Variables Categóricas"),
-      h4("- El control sobre dos variables categóricas se lleva a cabo solo sobre las filas que 
+      h2_mod("RMedic - Control para 1 Variable Numérica particionada por 1 Variable Categórica"),
+      h4("- El control sobre una variable numérica particionada por 1 variable categórica se lleva a cabo solo sobre las filas que 
       poseen simultáneamente datos de ambas variables."),
-      h4("- Corroborar que en ambas variables sus categorías y la cantidad de categorías debe tener sentido en el marco de la experiencia."), 
-      h4("- Corroborar la presencia de celdas vacías."),
+      h4("- Las categorías y cantidad de categorías de la variable categórica deben tener sentido en el marco de la experiencia."), 
+      h4("- Los valores mínimos y máximos de la variable numérica en cada categoría deben tener sentido en el marco de la experiencia."),
       br(),
       h3_mod("Parte 1 de 2 - Combinación de Categorías"),
       h4(htmlOutput(ns("Texto_Control01"))),
