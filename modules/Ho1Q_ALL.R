@@ -16,7 +16,7 @@ Ho1Q_SERVER <- function(input, output, session,
                               casoRMedic,
                               caso,
                               decimales,
-                              alfa) {
+                              alfa, batalla_naval) {
   
   
   

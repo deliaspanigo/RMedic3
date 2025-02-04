@@ -74,23 +74,23 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
       "5" = "GraficosQC_SERVER"
     )
     
-    observeEvent(list(casoRMedic(), batalla_naval()),{
-      req(casoRMedic())
-      
-        selected_module_name <- graficos_server_modules[[casoRMedic()]]
-        req(selected_module_name)
-      
-      
-#      if(casoRMedic() == 1){
-        callModule(module = Graficos1Q_SERVER, 
-                   id =  paste0("graficos", casoRMedic()),
-                   minibase = MiniBase,
-                   casoRMedic = casoRMedic,
-                   caso = 1,
-                   decimales = decimales,
-                   batalla_naval = batalla_naval)
-#      }
-    })
+#     observeEvent(list(casoRMedic(), batalla_naval()),{
+#       req(casoRMedic())
+#       
+#         selected_module_name <- graficos_server_modules[[casoRMedic()]]
+#         req(selected_module_name)
+#       
+#       
+# #      if(casoRMedic() == 1){
+#         callModule(module = Graficos1Q_SERVER, 
+#                    id =  paste0("graficos", casoRMedic()),
+#                    minibase = MiniBase,
+#                    casoRMedic = casoRMedic,
+#                    caso = 1,
+#                    decimales = decimales,
+#                    batalla_naval = batalla_naval)
+# #      }
+#     })
     
     # observeEvent(list(MiniBase, casoRMedic(), batalla_naval()), {
     #   req(base(), UserSelection, casoRMedic(), batalla_naval())

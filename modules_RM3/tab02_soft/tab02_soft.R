@@ -166,22 +166,50 @@ tab02_soft_SERVER <- function(id) {
         # Run Selected SERVER ------------------------------------------------------
         # All the modules have the same parameters.
         
-        observeEvent(active_tab(), {
-          req(output_list_database()$database)
-          req(active_tab() >= "2")  
-            
-          selected_module_name <- tab_modules[[active_tab()]]
-          req(selected_module_name)
-    
-          callModule(module = get(selected_module_name),
-                     id = paste0("menu", active_tab()),
+        observeEvent(output_list_database()$"database", {
+          
+          req(output_list_database()$"database")
+          
+          callModule(module = get("module_02_control_GENERAL_SERVER"),
+                     id = paste0("menu2"),
                      base = reactive(output_list_database()$"database"),
                      RMedic_general = RMedic_general,
                      status_BaseSalida = status_BaseSalida,
                      zocalo_CIE = zocalo_CIE)
     
+
+        
+        
+        callModule(module = get("module_03_tablas_GENERAL_SERVER"),
+                   id = paste0("menu3"),
+                   base = reactive(output_list_database()$"database"),
+                   RMedic_general = RMedic_general,
+                   status_BaseSalida = status_BaseSalida,
+                   zocalo_CIE = zocalo_CIE)
+        
+
+        callModule(module = get("module_04_graficos_GENERAL_SERVER"),
+                   id = paste0("menu4"),
+                   base = reactive(output_list_database()$"database"),
+                   RMedic_general = RMedic_general,
+                   status_BaseSalida = status_BaseSalida,
+                   zocalo_CIE = zocalo_CIE)
+        
+        callModule(module = get("module_05_ho_GENERAL_SERVER"),
+                   id = paste0("menu5"),
+                   base = reactive(output_list_database()$"database"),
+                   RMedic_general = RMedic_general,
+                   status_BaseSalida = status_BaseSalida,
+                   zocalo_CIE = zocalo_CIE)
+        
+        callModule(module = get("module_06_sobrevida_GENERAL_SERVER"),
+                   id = paste0("menu6"),
+                   base = reactive(output_list_database()$"database"),
+                   RMedic_general = RMedic_general,
+                   status_BaseSalida = status_BaseSalida,
+                   zocalo_CIE = zocalo_CIE)
+        
         })
-    
     }
     ############################################################################
     
@@ -218,12 +246,12 @@ tab02_soft_SERVER <- function(id) {
         ),
         tabPanel(title = "Pruebas de Hipótesis", value = 5,
                  br(),
-                 fluidRow(ModuleHoUI(id = ns("menu5"))),
+                 fluidRow(module_05_ho_GENERAL_UI(id = ns("menu5"))),
                  br(), br()
         ),
         tabPanel(title = "Sobrevida", value = 6,
                  br(),
-                 fluidRow(ModuleSobrevidaUI(id = ns("menu6"))),
+                 fluidRow(module_06_sobrevida_GENERAL_UI(id = ns("menu6"))),
                  br(), br()
         )
       )

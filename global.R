@@ -220,8 +220,8 @@ source("modules2/ModuleBase.R")
 #source("modules2/ModuleControl.R")
 #source("modules2/ModuleTablas.R")
 #source("modules2/ModuleGraficos.R")
-source("modules2/ModuleHo.R")
-source("modules2/ModuleSobrevida.R")
+#source("modules2/ModuleHo.R")
+#source("modules2/ModuleSobrevida.R")
 
 # Control
 #source("modules/Control1Q.R")
