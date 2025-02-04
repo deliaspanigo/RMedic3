@@ -110,30 +110,42 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
     
     ###################################################################### 
     
+
+      # selected_module_name <- "module_03_tablas_GENERAL_SERVER"
+      # 
+      # callModule(module = get(selected_module_name),
+      #            id = paste0("super_tablas"),
+      #            base = reactive(output_list_database()$"database"),
+      #            RMedic_general = RMedic_general,
+      #            status_BaseSalida = status_BaseSalida,
+      #            zocalo_CIE = zocalo_CIE)
+      
+
+
     # TABLAS!
-    callModule(module = Tablas1Q_SERVER, id =  "graficos08",
+    callModule(module = modules_03_tablas_Tablas1Q_SERVER, id =  "graficos08",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
     
     
-    callModule(module = Tablas1C_SERVER, id =  "graficos09",
+    callModule(module = modules_03_tablas_Tablas1C_SERVER, id =  "graficos09",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
     
    
-    callModule(module = Tablas2Q_SERVER, id =  "graficos10",
+    callModule(module = modules_03_tablas_Tablas2Q_SERVER, id =  "graficos10",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
     
-    callModule(module = Tablas2C_SERVER, id =  "graficos11",
+    callModule(module = modules_03_tablas_Tablas2C_SERVER, id =  "graficos11",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
     
-    callModule(module = TablasQC_SERVER, id =  "graficos12",
+    callModule(module = modules_03_tablas_TablasQC_SERVER, id =  "graficos12",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
@@ -161,11 +173,11 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                         Graficos2C_UI(ns("graficos06")),
                         GraficosQC_UI(ns("graficos07")),
                    br(), br(), br(), br(), br(),
-                        Tablas1Q_UI(ns("graficos08")),
-                        Tablas1C_UI(ns("graficos09")),
-                        Tablas2Q_UI(ns("graficos10")),
-                        Tablas2C_UI(ns("graficos11")),
-                        TablasQC_UI(ns("graficos12"))
+                   modules_03_tablas_Tablas1Q_UI(ns("graficos08")),
+                   modules_03_tablas_Tablas1C_UI(ns("graficos09")),
+                   modules_03_tablas_Tablas2Q_UI(ns("graficos10")),
+                   modules_03_tablas_Tablas2C_UI(ns("graficos11")),
+                   modules_03_tablas_TablasQC_UI(ns("graficos12"))
             ),
             column(1)
           )
