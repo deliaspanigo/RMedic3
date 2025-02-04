@@ -35,7 +35,11 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
     
     decimales <- UserSelection$decimales
     
+    selected_vars <- reactive({batalla_naval()[[1]]})
+    
     # observe(cat("casoRMedic()1: ", casoRMedic(), "\n"))
+    
+    
     
     MiniBase <- callModule(module = MiniBaseSERVER, id =  "minibase_tablas",
                            base = base,
@@ -70,74 +74,119 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
       "5" = "GraficosQC_SERVER"
     )
     
-    observeEvent(casoRMedic(), {
-      req(base, UserSelection)
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      
+        selected_module_name <- graficos_server_modules[[casoRMedic()]]
+        req(selected_module_name)
+      
+      
+#      if(casoRMedic() == 1){
+        callModule(module = Graficos1Q_SERVER, 
+                   id =  paste0("graficos", casoRMedic()),
+                   minibase = MiniBase,
+                   casoRMedic = casoRMedic,
+                   caso = 1,
+                   decimales = decimales,
+                   batalla_naval = batalla_naval)
+#      }
+    })
+    
+    # observeEvent(list(MiniBase, casoRMedic(), batalla_naval()), {
+    #   req(base(), UserSelection, casoRMedic(), batalla_naval())
+    # 
+    # 
+    #   callModule(module = get(selected_module_name),
+    #              id = paste0("graficos", casoRMedic()),
+    #              minibase = MiniBase,
+    #              casoRMedic = casoRMedic,
+    #              caso = casoRMedic(), #1,
+    #              decimales = decimales,
+    #              batalla_naval = batalla_naval)
+    # 
+    # })
+    
+    
+    # Caso 1: 1Q    
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      if(casoRMedic() == 1){
+        callModule(module = Graficos1Q_SERVER, id =  "graficos1",
+                   minibase = MiniBase,
+                   casoRMedic = casoRMedic,
+                   caso = 1,
+                   decimales = decimales,
+                   batalla_naval = batalla_naval)
+      }
+    })
+    
 
-      selected_module_name <- graficos_server_modules[[casoRMedic()]]
-      req(selected_module_name)
+    # Caso 2 : 1C
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      if(casoRMedic() == 2){
+        
+        callModule(module = Graficos1C_SERVER, id =  "graficos2",
+                   minibase = MiniBase,
+                   casoRMedic = casoRMedic,
+                   caso = 2,
+                   decimales = decimales,
+                   batalla_naval = batalla_naval)
+      }
+    })
+    
 
-      callModule(module = get(selected_module_name),
-                 id = paste0("graficos", casoRMedic()),
-                 minibase = MiniBase,
-                 casoRMedic = casoRMedic,
-                 caso = casoRMedic(), #1,
-                 decimales = decimales,
-                 batalla_naval = batalla_naval)
+    # Caso 3: 2Q
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      if(casoRMedic() == 3){
+        
+        callModule(module = Graficos2Q_SERVER, id =  "graficos3",
+                   minibase = MiniBase,
+                   casoRMedic = casoRMedic,
+                   caso = 3,
+                   decimales = decimales,
+                   batalla_naval = batalla_naval)
 
+      }
     })
     
     
+    # Caso 4: 2C
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      if(casoRMedic() == 4){
+        
+
+
+        callModule(module = Graficos2C_SERVER, id =  "graficos4",
+                   minibase = MiniBase,
+                   casoRMedic = casoRMedic,
+                   caso = 4,
+                   decimales = decimales,
+                   batalla_naval = batalla_naval)
+
+      }
+    })
     
     
-    # # Caso 1: 1Q
-    # callModule(module = Graficos1Q_SERVER, id =  "graficos1",
-    #            minibase = MiniBase,
-    #            casoRMedic = casoRMedic,
-    #            caso = 1,
-    #            decimales = decimales,
-    #            batalla_naval = batalla_naval)
-    # 
-    # 
-    # 
-    # # Caso 2 : 1C
-    # callModule(module = Graficos1C_SERVER, id =  "graficos2",
-    #            minibase = MiniBase,
-    #            casoRMedic = casoRMedic,
-    #            caso = 2,
-    #            decimales = decimales,
-    #            batalla_naval = batalla_naval)
-    # 
-    # 
-    # # Caso 3: 2Q
-    # callModule(module = Graficos2Q_SERVER, id =  "graficos3",
-    #            minibase = MiniBase,
-    #            casoRMedic = casoRMedic,
-    #            caso = 3,
-    #            decimales = decimales,
-    #            batalla_naval = batalla_naval)
-    # 
-    # 
-    # 
-    # 
-    # # Caso 4: 2C
-    # callModule(module = Graficos2C_SERVER, id =  "graficos4",
-    #            minibase = MiniBase,
-    #            casoRMedic = casoRMedic,
-    #            caso = 4,
-    #            decimales = decimales,
-    #            batalla_naval = batalla_naval)
-    # 
-    # 
-    # 
-    # 
-    # # Caso 5: QC
-    # callModule(module = GraficosQC_SERVER, id =  "graficos5",
-    #            minibase = MiniBase,
-    #            casoRMedic = casoRMedic,
-    #            caso = 5,
-    #            decimales = decimales,
-    #            batalla_naval = batalla_naval)
-    
+    # Caso 5: QC
+    observeEvent(list(casoRMedic(), batalla_naval()),{
+      req(casoRMedic())
+      if(casoRMedic() == 5){
+        
+        
+      
+
+          callModule(module = GraficosQC_SERVER, id =  "graficos5",
+                     minibase = MiniBase,
+                     casoRMedic = casoRMedic,
+                     caso = 5,
+                     decimales = decimales,
+                     batalla_naval = batalla_naval)
+          
+      }
+    })
     
     
     ###################################################################### 
