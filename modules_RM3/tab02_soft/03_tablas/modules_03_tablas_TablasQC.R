@@ -1,5 +1,5 @@
 ## Segmento del UI
-TablasQC_UI <- function(id) {
+modules_03_tablas_TablasQC_UI <- function(id) {
   ns <- NS(id)
   
   uiOutput(ns("SeccionTablasQC"))
@@ -11,7 +11,7 @@ TablasQC_UI <- function(id) {
 
 
 ## Segmento del server
-TablasQC_SERVER <- function(input, output, session, 
+modules_03_tablas_TablasQC_SERVER <- function(input, output, session, 
                             minibase, 
                             batalla_naval,
                             decimales) {
@@ -60,7 +60,7 @@ TablasQC_SERVER <- function(input, output, session,
     armado <- paste0(paste0("En filas: ", referencias[1], "(Categórica)"), 
                      "<br/>", 
                      paste0("En columnas: ", referencias[2], " (Recategorizada)")
-                    )
+    )
     
     armado <- HTML(armado)
     
@@ -182,7 +182,7 @@ TablasQC_SERVER <- function(input, output, session,
     
     # salida[[11]] <- as.matrix(table(minibase()))
     # salida[[11]] <- as.matrix(salida[[11]])
-     salida[[11]][1,1] <- as.character(salida[[11]][1,1])
+    salida[[11]][1,1] <- as.character(salida[[11]][1,1])
     
     # for(k in 1:length(salida[[11]])) {
     # salida[[11]][[k]][,2] <- as.character(salida[[11]][[k]][,2])
@@ -237,8 +237,8 @@ TablasQC_SERVER <- function(input, output, session,
     })
   )
   
-    
- 
+  
+  
   
   
   
@@ -428,7 +428,7 @@ TablasQC_SERVER <- function(input, output, session,
                            # tableOutput(ns("Salida_tabla_2c_RMedic_12")),
                            # uiOutput(ns("Controlador2_2c_RMedic")),
                            # br(),
-                          # "Vacío por el momento!"
+                           # "Vacío por el momento!"
                            
                   )
       )

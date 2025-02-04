@@ -1,5 +1,5 @@
 ## Segmento del UI
-Tablas2Q_UI <- function(id) {
+modules_03_tablas_Tablas2Q_UI <- function(id) {
   ns <- NS(id)
   
   uiOutput(ns("SeccionTablas2Q"))
@@ -11,7 +11,7 @@ Tablas2Q_UI <- function(id) {
 
 
 ## Segmento del server
-Tablas2Q_SERVER <- function(input, output, session, 
+modules_03_tablas_Tablas2Q_SERVER <- function(input, output, session, 
                             minibase, 
                             batalla_naval,
                             decimales) {
@@ -64,7 +64,7 @@ Tablas2Q_SERVER <- function(input, output, session,
     
     general$df02[[6]][[1]] <- as.matrix(general$df02[[6]][[1]])
     general$df02[[6]][[1]][1,1] <- as.character(general$df02[[6]][[1]][1,1])
-
+    
     
     return(general)
   })
@@ -75,10 +75,10 @@ Tablas2Q_SERVER <- function(input, output, session,
     tabla01 <- test[[7]]
     tabla02 <- tabla01 # test[[8]]
     tabla03 <-tabla01 # test[[9]]
-  
+    
     for(k1 in 1:nrow(tabla02)) {  
       for (k2 in 1:ncol(tabla01)) {
-      
+        
         
         tabla02[k1, k2] <- test[[8]][k1, k2]
         tabla03[k1, k2] <- test[[9]][k1, k2]
@@ -93,8 +93,8 @@ Tablas2Q_SERVER <- function(input, output, session,
   # Tabla Esperados
   observe( output$tabla_especial01 <- renderTable(digits = decimales(), align= "c",rownames = T,{
     
-   # Tablas_Chi()$expected
-  Tablas_Chi()[[1]]
+    # Tablas_Chi()$expected
+    Tablas_Chi()[[1]]
     
   }))
   
@@ -378,7 +378,7 @@ Tablas2Q_SERVER <- function(input, output, session,
                            Referencias_var_2q(),
                            tableOutput(ns("Salida_tabla_2q_RMedic_13")),
                            br()
-                          
+                           
                   ),
                   tabPanel(title = "Por filas", value = 5,
                            h3(textOutput(ns("Salida_texto_2q_RMedic_14"))),
@@ -431,7 +431,7 @@ Tablas2Q_SERVER <- function(input, output, session,
                            Referencias_var_2q(),
                            tableOutput(ns("Salida_tabla_2q_RMedic_24")),
                            br()
-                           ),
+                  ),
                   tabPanel(title = "Otras Tablas", value = 8,
                            h3("Frecuencias Esperadas"),
                            Referencias_var_2q(),
@@ -444,7 +444,7 @@ Tablas2Q_SERVER <- function(input, output, session,
                            h3("Residuos Studentizados"),
                            Referencias_var_2q(),
                            tableOutput(ns("tabla_especial03")), 
-                           )
+                  )
       ),
     )
   })

@@ -156,7 +156,7 @@ tab02_soft_SERVER <- function(id) {
         # Modules Soft - Tabs mapping
         tab_modules <- list(
           "2" = "module_02_control_GENERAL_SERVER",
-          "3" = "ModuleTablasSERVER",
+          "3" = "module_03_tablas_GENERAL_SERVER",
           "4" = "ModuleGraficosSERVER",
           "5" = "ModuleHoSERVER",
           "6" = "ModuleSobrevidaSERVER"
@@ -208,7 +208,7 @@ tab02_soft_SERVER <- function(id) {
         ),
         tabPanel(title = "Tablas", value = 3,
                  br(),
-                 fluidRow(ModuleTablasUI(id = ns("menu3"))),
+                 fluidRow(module_03_tablas_GENERAL_UI(id = ns("menu3"))),
                  br(), br()
         ),
         tabPanel(title = "Gráficos", value = 4,
