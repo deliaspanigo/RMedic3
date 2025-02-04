@@ -1,6 +1,6 @@
 
 
-ModuleGraficosUI <- function(id) {
+module_04_graficos_GENERAL_UI <- function(id) {
   
   ns <- NS(id)
   
@@ -13,9 +13,9 @@ ModuleGraficosUI <- function(id) {
 
 
 
-ModuleGraficosSERVER <-  function(input, output, session, base,
-                                RMedic_general, status_BaseSalida,
-                                zocalo_CIE) { 
+module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
+                                  RMedic_general, status_BaseSalida,
+                                  zocalo_CIE) { 
   
   observe({
     
@@ -45,7 +45,7 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
     })
     decimales <- UserSelection$decimales
     
-   # observe(cat("casoRMedic()1: ", casoRMedic(), "\n"))
+    # observe(cat("casoRMedic()1: ", casoRMedic(), "\n"))
     
     MiniBase <- callModule(module = MiniBaseSERVER, id =  "graficos02",
                            base = base,
@@ -53,20 +53,20 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                            verbatim = FALSE)
     
     
-  
-      
-  
-      
-      
+    
+    
+    
+    
+    
     # Caso 1: 1Q
     callModule(module = Graficos1Q_SERVER, id =  "graficos03",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 1,
                decimales = decimales)
-  
-  
-  
+    
+    
+    
     # Caso 2 : 1C
     callModule(module = Graficos1C_SERVER, id =  "graficos04",
                minibase = MiniBase,
@@ -74,7 +74,7 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                caso = 2,
                decimales = decimales,
                batalla_naval = batalla_naval)
-  
+    
     
     # Caso 3: 2Q
     callModule(module = Graficos2Q_SERVER, id =  "graficos05",
@@ -83,9 +83,9 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                caso = 3,
                decimales = decimales,
                batalla_naval = batalla_naval)
-  
-  
-  
+    
+    
+    
     
     # Caso 4: 2C
     callModule(module = Graficos2C_SERVER, id =  "graficos06",
@@ -94,7 +94,7 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                caso = 4,
                decimales = decimales,
                batalla_naval = batalla_naval)
-  
+    
     
     
     
@@ -106,22 +106,22 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                decimales = decimales,
                batalla_naval = batalla_naval)
     
-   
+    
     
     ###################################################################### 
     
-
-      # selected_module_name <- "module_03_tablas_GENERAL_SERVER"
-      # 
-      # callModule(module = get(selected_module_name),
-      #            id = paste0("super_tablas"),
-      #            base = reactive(output_list_database()$"database"),
-      #            RMedic_general = RMedic_general,
-      #            status_BaseSalida = status_BaseSalida,
-      #            zocalo_CIE = zocalo_CIE)
-      
-
-
+    
+    # selected_module_name <- "module_03_tablas_GENERAL_SERVER"
+    # 
+    # callModule(module = get(selected_module_name),
+    #            id = paste0("super_tablas"),
+    #            base = reactive(output_list_database()$"database"),
+    #            RMedic_general = RMedic_general,
+    #            status_BaseSalida = status_BaseSalida,
+    #            zocalo_CIE = zocalo_CIE)
+    
+    
+    
     # TABLAS!
     callModule(module = modules_03_tablas_Tablas1Q_SERVER, id =  "graficos08",
                minibase = MiniBase,
@@ -134,7 +134,7 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
                batalla_naval = UserSelection$batalla_naval,
                decimales = decimales)
     
-   
+    
     callModule(module = modules_03_tablas_Tablas2Q_SERVER, id =  "graficos10",
                minibase = MiniBase,
                batalla_naval = UserSelection$batalla_naval,
@@ -152,37 +152,37 @@ ModuleGraficosSERVER <-  function(input, output, session, base,
     
     output$ui_menuGRAFICOS <- renderUI({
       
-        # Si no hay orden de salir a la cancha... Nadie sale...
-        if(is.null(RMedic_general())) return(NULL)
-        if(!RMedic_general()) return(NULL)
-    
-        # Si no hay status de BaseSalida(), nos vamos...
-        if(is.null(status_BaseSalida())) return(NULL)
-        if(!status_BaseSalida()) return(NULL)
-    
-    
-          fluidRow(
-            column(1),
-            column(10,
-                   h3("Menú para Gráficos"),
-                    BatallaNavalUI(ns("graficos01")),
-                      MiniBaseUI(ns("graficos02")),
-                        Graficos1Q_UI(ns("graficos03")),
-                        Graficos1C_UI(ns("graficos04")),
-                        Graficos2Q_UI(ns("graficos05")),
-                        Graficos2C_UI(ns("graficos06")),
-                        GraficosQC_UI(ns("graficos07")),
-                   br(), br(), br(), br(), br(),
-                   modules_03_tablas_Tablas1Q_UI(ns("graficos08")),
-                   modules_03_tablas_Tablas1C_UI(ns("graficos09")),
-                   modules_03_tablas_Tablas2Q_UI(ns("graficos10")),
-                   modules_03_tablas_Tablas2C_UI(ns("graficos11")),
-                   modules_03_tablas_TablasQC_UI(ns("graficos12"))
-            ),
-            column(1)
-          )
-    
-
+      # Si no hay orden de salir a la cancha... Nadie sale...
+      if(is.null(RMedic_general())) return(NULL)
+      if(!RMedic_general()) return(NULL)
+      
+      # Si no hay status de BaseSalida(), nos vamos...
+      if(is.null(status_BaseSalida())) return(NULL)
+      if(!status_BaseSalida()) return(NULL)
+      
+      
+      fluidRow(
+        column(1),
+        column(10,
+               h3("Menú para Gráficos"),
+               BatallaNavalUI(ns("graficos01")),
+               MiniBaseUI(ns("graficos02")),
+               Graficos1Q_UI(ns("graficos03")),
+               Graficos1C_UI(ns("graficos04")),
+               Graficos2Q_UI(ns("graficos05")),
+               Graficos2C_UI(ns("graficos06")),
+               GraficosQC_UI(ns("graficos07")),
+               br(), br(), br(), br(), br(),
+               modules_03_tablas_Tablas1Q_UI(ns("graficos08")),
+               modules_03_tablas_Tablas1C_UI(ns("graficos09")),
+               modules_03_tablas_Tablas2Q_UI(ns("graficos10")),
+               modules_03_tablas_Tablas2C_UI(ns("graficos11")),
+               modules_03_tablas_TablasQC_UI(ns("graficos12"))
+        ),
+        column(1)
+      )
+      
+      
       
     })
     

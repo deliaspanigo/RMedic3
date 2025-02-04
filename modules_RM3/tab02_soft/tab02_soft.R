@@ -157,7 +157,7 @@ tab02_soft_SERVER <- function(id) {
         tab_modules <- list(
           "2" = "module_02_control_GENERAL_SERVER",
           "3" = "module_03_tablas_GENERAL_SERVER",
-          "4" = "ModuleGraficosSERVER",
+          "4" = "module_04_graficos_GENERAL_SERVER",
           "5" = "ModuleHoSERVER",
           "6" = "ModuleSobrevidaSERVER"
         )
@@ -213,7 +213,7 @@ tab02_soft_SERVER <- function(id) {
         ),
         tabPanel(title = "Gráficos", value = 4,
                  br(),
-                 fluidRow(ModuleGraficosUI(id = ns("menu4"))),
+                 fluidRow(module_04_graficos_GENERAL_UI(id = ns("menu4"))),
                  br(), br()
         ),
         tabPanel(title = "Pruebas de Hipótesis", value = 5,
