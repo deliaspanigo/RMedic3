@@ -26,12 +26,29 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
     
     
     UserSelection <- callModule(module = BatallaNavalSERVER, 
-                                id =  "graficos01",
+                                id =  "var_selection_graficos",
                                 base = base,
                                 zocalo_CIE = zocalo_CIE,
                                 verbatim = FALSE)
     
     batalla_naval <- UserSelection$batalla_naval
+    
+    decimales <- UserSelection$decimales
+    
+    # observe(cat("casoRMedic()1: ", casoRMedic(), "\n"))
+    
+    MiniBase <- callModule(module = MiniBaseSERVER, id =  "minibase_tablas",
+                           base = base,
+                           batalla_naval = UserSelection$batalla_naval,
+                           verbatim = FALSE)
+    
+    
+    
+    # my_case <- reactive({
+    #   
+    #   UserSelection$batalla_naval()$caso_tipo_variables
+    #   
+    # })
     casoRMedic <- reactive({
       
       if(is.null(batalla_naval())) return(NULL)
@@ -43,63 +60,77 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
       casoRMedic
       
     })
-    decimales <- UserSelection$decimales
     
-    # observe(cat("casoRMedic()1: ", casoRMedic(), "\n"))
+    # Modules Soft - Tabs mapping
+    graficos_server_modules <- list(
+      "1" = "Graficos1Q_SERVER",
+      "2" = "Graficos1C_SERVER",
+      "3" = "Graficos2Q_SERVER",
+      "4" = "Graficos1C_SERVER",
+      "5" = "GraficosQC_SERVER"
+    )
     
-    MiniBase <- callModule(module = MiniBaseSERVER, id =  "graficos02",
-                           base = base,
-                           batalla_naval = UserSelection$batalla_naval,
-                           verbatim = FALSE)
-    
-    
-    
+    # observeEvent(casoRMedic(), {
+    #   req(base, UserSelection)
+    #   
+    #   selected_module_name <- graficos_server_modules[[casoRMedic()]]
+    #   req(selected_module_name)
+    #   
+    #   callModule(module = get(selected_module_name),
+    #              id = paste0("graficos", casoRMedic()),
+    #              minibase = MiniBase,
+    #              casoRMedic = casoRMedic,
+    #              caso = casoRMedic(), #1,
+    #              decimales = decimales,
+    #              batalla_naval = batalla_naval)
+    # 
+    # })
     
     
     
     
     # Caso 1: 1Q
-    callModule(module = Graficos1Q_SERVER, id =  "graficos03",
+    callModule(module = Graficos1Q_SERVER, id =  "graficos1",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 1,
                decimales = decimales)
-    
-    
-    
+
+
+
     # Caso 2 : 1C
-    callModule(module = Graficos1C_SERVER, id =  "graficos04",
+    callModule(module = Graficos1C_SERVER, id =  "graficos2",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 2,
                decimales = decimales,
                batalla_naval = batalla_naval)
-    
-    
+
+
     # Caso 3: 2Q
-    callModule(module = Graficos2Q_SERVER, id =  "graficos05",
+    callModule(module = Graficos2Q_SERVER, id =  "graficos3",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 3,
                decimales = decimales,
                batalla_naval = batalla_naval)
-    
-    
-    
-    
+
+
+
+
     # Caso 4: 2C
-    callModule(module = Graficos2C_SERVER, id =  "graficos06",
+    callModule(module = Graficos2C_SERVER, id =  "graficos4",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 4,
                decimales = decimales,
                batalla_naval = batalla_naval)
-    
-    
-    
-    
+
+
+
+
     # Caso 5: QC
-    callModule(module = GraficosQC_SERVER, id =  "graficos07",
+    callModule(module = GraficosQC_SERVER, id =  "graficos5",
                minibase = MiniBase,
                casoRMedic = casoRMedic,
                caso = 5,
@@ -111,44 +142,66 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
     ###################################################################### 
     
     
-    # selected_module_name <- "module_03_tablas_GENERAL_SERVER"
+    my_case <- reactive({
+      
+      UserSelection$batalla_naval()$caso_tipo_variables
+      
+    })
+    
+    
+    # Modules Soft - Tabs mapping
+    tablas_server_modules <- list(
+      "1" = "modules_03_tablas_Tablas1Q_SERVER",
+      "2" = "modules_03_tablas_Tablas1C_SERVER",
+      "3" = "modules_03_tablas_Tablas2Q_SERVER",
+      "4" = "modules_03_tablas_Tablas2C_SERVER",
+      "5" = "modules_03_tablas_TablasQC_SERVER"
+    )
+    
+    observeEvent(my_case(), {
+      req(base, UserSelection)
+      
+      selected_module_name <- tablas_server_modules[[my_case()]]
+      req(selected_module_name)
+      
+      callModule(module = get(selected_module_name),
+                 id = paste0("tablas_plot", my_case()),
+                 minibase = MiniBase,
+                 batalla_naval = UserSelection$batalla_naval,
+                 decimales = UserSelection$decimales)
+      
+    })
+    
+    
+    
+    # # TABLAS!
+    # callModule(module = modules_03_tablas_Tablas1Q_SERVER, id =  "graficos08",
+    #            minibase = MiniBase,
+    #            batalla_naval = UserSelection$batalla_naval,
+    #            decimales = decimales)
     # 
-    # callModule(module = get(selected_module_name),
-    #            id = paste0("super_tablas"),
-    #            base = reactive(output_list_database()$"database"),
-    #            RMedic_general = RMedic_general,
-    #            status_BaseSalida = status_BaseSalida,
-    #            zocalo_CIE = zocalo_CIE)
+    # 
+    # callModule(module = modules_03_tablas_Tablas1C_SERVER, id =  "graficos09",
+    #            minibase = MiniBase,
+    #            batalla_naval = UserSelection$batalla_naval,
+    #            decimales = decimales)
+    # 
+    # 
+    # callModule(module = modules_03_tablas_Tablas2Q_SERVER, id =  "graficos10",
+    #            minibase = MiniBase,
+    #            batalla_naval = UserSelection$batalla_naval,
+    #            decimales = decimales)
+    # 
+    # callModule(module = modules_03_tablas_Tablas2C_SERVER, id =  "graficos11",
+    #            minibase = MiniBase,
+    #            batalla_naval = UserSelection$batalla_naval,
+    #            decimales = decimales)
+    # 
+    # callModule(module = modules_03_tablas_TablasQC_SERVER, id =  "graficos12",
+    #            minibase = MiniBase,
+    #            batalla_naval = UserSelection$batalla_naval,
+    #            decimales = decimales)
     
-    
-    
-    # TABLAS!
-    callModule(module = modules_03_tablas_Tablas1Q_SERVER, id =  "graficos08",
-               minibase = MiniBase,
-               batalla_naval = UserSelection$batalla_naval,
-               decimales = decimales)
-    
-    
-    callModule(module = modules_03_tablas_Tablas1C_SERVER, id =  "graficos09",
-               minibase = MiniBase,
-               batalla_naval = UserSelection$batalla_naval,
-               decimales = decimales)
-    
-    
-    callModule(module = modules_03_tablas_Tablas2Q_SERVER, id =  "graficos10",
-               minibase = MiniBase,
-               batalla_naval = UserSelection$batalla_naval,
-               decimales = decimales)
-    
-    callModule(module = modules_03_tablas_Tablas2C_SERVER, id =  "graficos11",
-               minibase = MiniBase,
-               batalla_naval = UserSelection$batalla_naval,
-               decimales = decimales)
-    
-    callModule(module = modules_03_tablas_TablasQC_SERVER, id =  "graficos12",
-               minibase = MiniBase,
-               batalla_naval = UserSelection$batalla_naval,
-               decimales = decimales)
     
     output$ui_menuGRAFICOS <- renderUI({
       
@@ -165,19 +218,19 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
         column(1),
         column(10,
                h3("Menú para Gráficos"),
-               BatallaNavalUI(ns("graficos01")),
-               MiniBaseUI(ns("graficos02")),
-               Graficos1Q_UI(ns("graficos03")),
-               Graficos1C_UI(ns("graficos04")),
-               Graficos2Q_UI(ns("graficos05")),
-               Graficos2C_UI(ns("graficos06")),
-               GraficosQC_UI(ns("graficos07")),
+               BatallaNavalUI(ns("var_selection_graficos")),
+               MiniBaseUI(ns("minibase_graficos")),
+               Graficos1Q_UI(ns("graficos1")),
+               Graficos1C_UI(ns("graficos2")),
+               Graficos2Q_UI(ns("graficos3")),
+               Graficos2C_UI(ns("graficos4")),
+               GraficosQC_UI(ns("graficos5")),
                br(), br(), br(), br(), br(),
-               modules_03_tablas_Tablas1Q_UI(ns("graficos08")),
-               modules_03_tablas_Tablas1C_UI(ns("graficos09")),
-               modules_03_tablas_Tablas2Q_UI(ns("graficos10")),
-               modules_03_tablas_Tablas2C_UI(ns("graficos11")),
-               modules_03_tablas_TablasQC_UI(ns("graficos12"))
+               modules_03_tablas_Tablas1Q_UI(ns("tablas_plot1")),
+               modules_03_tablas_Tablas1C_UI(ns("tablas_plot2")),
+               modules_03_tablas_Tablas2Q_UI(ns("tablas_plot3")),
+               modules_03_tablas_Tablas2C_UI(ns("tablas_plot4")),
+               modules_03_tablas_TablasQC_UI(ns("tablas_plot5"))
         ),
         column(1)
       )
