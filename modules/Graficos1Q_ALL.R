@@ -15,7 +15,7 @@ Graficos1Q_SERVER <- function(input, output, session,
                               minibase, 
                               casoRMedic,
                               caso,
-                              decimales) {
+                              decimales, batalla_naval) {
   
   
   

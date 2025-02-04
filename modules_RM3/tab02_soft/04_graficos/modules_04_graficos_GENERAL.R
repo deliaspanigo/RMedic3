@@ -70,72 +70,73 @@ module_04_graficos_GENERAL_SERVER <-  function(input, output, session, base,
       "5" = "GraficosQC_SERVER"
     )
     
-    # observeEvent(casoRMedic(), {
-    #   req(base, UserSelection)
-    #   
-    #   selected_module_name <- graficos_server_modules[[casoRMedic()]]
-    #   req(selected_module_name)
-    #   
-    #   callModule(module = get(selected_module_name),
-    #              id = paste0("graficos", casoRMedic()),
-    #              minibase = MiniBase,
-    #              casoRMedic = casoRMedic,
-    #              caso = casoRMedic(), #1,
-    #              decimales = decimales,
-    #              batalla_naval = batalla_naval)
+    observeEvent(casoRMedic(), {
+      req(base, UserSelection)
+
+      selected_module_name <- graficos_server_modules[[casoRMedic()]]
+      req(selected_module_name)
+
+      callModule(module = get(selected_module_name),
+                 id = paste0("graficos", casoRMedic()),
+                 minibase = MiniBase,
+                 casoRMedic = casoRMedic,
+                 caso = casoRMedic(), #1,
+                 decimales = decimales,
+                 batalla_naval = batalla_naval)
+
+    })
+    
+    
+    
+    
+    # # Caso 1: 1Q
+    # callModule(module = Graficos1Q_SERVER, id =  "graficos1",
+    #            minibase = MiniBase,
+    #            casoRMedic = casoRMedic,
+    #            caso = 1,
+    #            decimales = decimales,
+    #            batalla_naval = batalla_naval)
     # 
-    # })
-    
-    
-    
-    
-    # Caso 1: 1Q
-    callModule(module = Graficos1Q_SERVER, id =  "graficos1",
-               minibase = MiniBase,
-               casoRMedic = casoRMedic,
-               caso = 1,
-               decimales = decimales)
-
-
-
-    # Caso 2 : 1C
-    callModule(module = Graficos1C_SERVER, id =  "graficos2",
-               minibase = MiniBase,
-               casoRMedic = casoRMedic,
-               caso = 2,
-               decimales = decimales,
-               batalla_naval = batalla_naval)
-
-
-    # Caso 3: 2Q
-    callModule(module = Graficos2Q_SERVER, id =  "graficos3",
-               minibase = MiniBase,
-               casoRMedic = casoRMedic,
-               caso = 3,
-               decimales = decimales,
-               batalla_naval = batalla_naval)
-
-
-
-
-    # Caso 4: 2C
-    callModule(module = Graficos2C_SERVER, id =  "graficos4",
-               minibase = MiniBase,
-               casoRMedic = casoRMedic,
-               caso = 4,
-               decimales = decimales,
-               batalla_naval = batalla_naval)
-
-
-
-
-    # Caso 5: QC
-    callModule(module = GraficosQC_SERVER, id =  "graficos5",
-               minibase = MiniBase,
-               casoRMedic = casoRMedic,
-               caso = 5,
-               decimales = decimales,
-               batalla_naval = batalla_naval)
+    # 
+    # 
+    # # Caso 2 : 1C
+    # callModule(module = Graficos1C_SERVER, id =  "graficos2",
+    #            minibase = MiniBase,
+    #            casoRMedic = casoRMedic,
+    #            caso = 2,
+    #            decimales = decimales,
+    #            batalla_naval = batalla_naval)
+    # 
+    # 
+    # # Caso 3: 2Q
+    # callModule(module = Graficos2Q_SERVER, id =  "graficos3",
+    #            minibase = MiniBase,
+    #            casoRMedic = casoRMedic,
+    #            caso = 3,
+    #            decimales = decimales,
+    #            batalla_naval = batalla_naval)
+    # 
+    # 
+    # 
+    # 
+    # # Caso 4: 2C
+    # callModule(module = Graficos2C_SERVER, id =  "graficos4",
+    #            minibase = MiniBase,
+    #            casoRMedic = casoRMedic,
+    #            caso = 4,
+    #            decimales = decimales,
+    #            batalla_naval = batalla_naval)
+    # 
+    # 
+    # 
+    # 
+    # # Caso 5: QC
+    # callModule(module = GraficosQC_SERVER, id =  "graficos5",
+    #            minibase = MiniBase,
+    #            casoRMedic = casoRMedic,
+    #            caso = 5,
+    #            decimales = decimales,
+    #            batalla_naval = batalla_naval)
     
     
     
